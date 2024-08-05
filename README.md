@@ -70,10 +70,11 @@ DeleteAlert({item:bootList[index], onDelete:deleteItem, onArchive:updateBootInDb
 
 #### AddItem
 
-<img src="./img/p1.png" alt="" width="100"/>
-<img src="./img/p2.png" alt="" width="100"/>
-<img src="./img/p3.png" alt="" width="100"/>
-
+<p align="center">
+<img src="./img/p1.png" alt="" width="200"/>
+<img src="./img/p2.png" alt="" width="200"/>
+<img src="./img/p3.png" alt="" width="200"/>
+</p>
 
 Component AddBoot need to be imported to App.js
 
