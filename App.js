@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,10 +9,11 @@ import {
   Alert,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import { AddBoot } from './AddBoot';
-import { UpdateBoot } from './UpdateBoot';
-import { init, addBoot, updateBoot, deleteBoot, fetchAllBoot } from './db';
-import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
+import {AddBoot} from './components/AddBoot';
+import {UpdateBoot} from './components/UpdateBoot';
+import {init, addBoot, updateBoot, deleteBoot, fetchAllBoot} from './db';
+import {GestureHandlerRootView, Swipeable} from 'react-native-gesture-handler';
+import BootList from './components/BootList'; // Import the new component
 
 init()
   .then(() => {
@@ -23,49 +24,43 @@ init()
   });
 
 /**
- * Main App component.
- * @returns {JSX.Element} The main App component.
+ * App component renders the main application with boot management features.
+ *
+ * @returns {JSX.Element} The rendered component.
  */
 const App = () => {
   /**
-   * State to hold the list of boots.
-   * @type {Array<Object>}
+   * @type {[Array, Function]} bootList - State variable for storing the list of boots.
    */
   const [bootList, setBootList] = useState([]);
 
   /**
-   * State to control the visibility of the AddBoot modal.
-   * @type {boolean}
+   * @type {[boolean, Function]} visibility - State variable for controlling the visibility of the AddBoot modal.
    */
   const [visibility, setVisibility] = useState(false);
 
   /**
-   * State to control the visibility of the UpdateBoot modal.
-   * @type {boolean}
+   * @type {[boolean, Function]} updateVisibility - State variable for controlling the visibility of the UpdateBoot modal.
    */
   const [updateVisibility, setUpdateVisibility] = useState(false);
 
   /**
-   * State to hold the boot item to be updated.
-   * @type {Object|null}
+   * @type {[Object|null, Function]} itemToUpdate - State variable for storing the boot item to be updated.
    */
   const [itemToUpdate, setItemToUpdate] = useState(null);
 
   /**
-   * State to hold the index of the boot item to be updated.
-   * @type {number}
+   * @type {[number, Function]} itemToUpdateIndex - State variable for storing the index of the boot item to be updated.
    */
   const [itemToUpdateIndex, setItemToUpdateIndex] = useState(-1);
 
   /**
-   * State to trigger re-fetching of the boot list.
-   * @type {boolean}
+   * @type {[boolean, Function]} updateBootList - State variable for triggering re-fetch of the boot list.
    */
   const [updateBootList, setUpdateBootList] = useState(false);
 
   /**
-   * State to hold the selected boot items.
-   * @type {Object}
+   * @type {[Object, Function]} selectedItems - State variable for storing the selected boot items.
    */
   const [selectedItems, setSelectedItems] = useState({});
 
@@ -75,8 +70,9 @@ const App = () => {
   }, [updateBootList]);
 
   /**
-   * Toggles the checkbox for the selected boot.
-   * @param {number} id - The ID of the boot to toggle.
+   * Toggles the checkbox selection state for a given boot item.
+   *
+   * @param {number} id - The ID of the boot item to toggle.
    */
   const toggleCheckbox = id => {
     setSelectedItems(selectedItems => {
@@ -89,8 +85,9 @@ const App = () => {
   };
 
   /**
-   * Removes a boot from the selected list.
-   * @param {number} id - The ID of the boot to remove.
+   * Removes an item from the selected items list.
+   *
+   * @param {number} id - The ID of the boot item to remove from the selected list.
    */
   const removeItemFromSelectedList = id => {
     const tmp = selectedItems;
@@ -99,7 +96,8 @@ const App = () => {
   };
 
   /**
-   * Saves a new boot to the database.
+   * Saves a new boot item to the database.
+   *
    * @param {string} type - The type of the boot.
    * @param {string} size - The size of the boot.
    */
@@ -108,44 +106,40 @@ const App = () => {
       const dbResult = await addBoot(type, size);
     } catch (err) {
       console.log(err);
-    } finally {
-      // No need to do anything
     }
   }
 
   /**
-   * Deletes a boot from the database.
-   * @param {number} id - The ID of the boot to delete.
+   * Deletes a boot item from the database.
+   *
+   * @param {number} id - The ID of the boot item to delete.
    */
   async function deleteBootFromDb(id) {
     try {
       const dbResult = await deleteBoot(id);
     } catch (err) {
       console.log(err);
-    } finally {
-      // No need to do anything
     }
   }
 
   /**
-   * Updates a boot in the database.
-   * @param {number} id - The ID of the boot to update.
-   * @param {string} type - The new type of the boot.
-   * @param {string} size - The new size of the boot.
-   * @param {number} archive - The archive status of the boot.
+   * Updates an existing boot item in the database.
+   *
+   * @param {number} id - The ID of the boot item to update.
+   * @param {string} type - The type of the boot.
+   * @param {string} size - The size of the boot.
+   * @param {boolean} archive - Whether the boot item is archived.
    */
   async function updateBootInDb(id, type, size, archive) {
     try {
       const dbResult = await updateBoot(id, type, size, archive);
     } catch (err) {
       console.log(err);
-    } finally {
-      // No need to do anything
     }
   }
 
   /**
-   * Fetches all boots from the database.
+   * Fetches all boot items from the database and updates the state.
    */
   async function readAllBoot() {
     try {
@@ -161,9 +155,10 @@ const App = () => {
   }
 
   /**
-   * Updates the selected boot.
-   * @param {string} type - The new type of the boot.
-   * @param {string} size - The new size of the boot.
+   * Updates a boot item in the state and database.
+   *
+   * @param {string} type - The type of the boot.
+   * @param {string} size - The size of the boot.
    */
   const updateItem = (type, size) => {
     if (itemToUpdateIndex > -1) {
@@ -176,8 +171,9 @@ const App = () => {
   };
 
   /**
-   * Shows the update modal for the selected boot.
-   * @param {number} updateIndex - The index of the boot to update.
+   * Opens the update modal for a boot item.
+   *
+   * @param {number} updateIndex - The index of the boot item to update.
    */
   const updateItemModal = updateIndex => {
     setItemToUpdateIndex(updateIndex);
@@ -186,7 +182,8 @@ const App = () => {
   };
 
   /**
-   * Adds a new boot.
+   * Adds a new boot item and updates the state.
+   *
    * @param {string} type - The type of the boot.
    * @param {string} size - The size of the boot.
    */
@@ -197,8 +194,9 @@ const App = () => {
   };
 
   /**
-   * Deletes a boot.
-   * @param {number} id - The ID of the boot to delete.
+   * Deletes a boot item and updates the state.
+   *
+   * @param {number} id - The ID of the boot item to delete.
    */
   const deleteItem = id => {
     removeItemFromSelectedList(id);
@@ -207,13 +205,19 @@ const App = () => {
   };
 
   /**
-   * Renders a boot item.
+   * Renders a single boot item.
+   *
    * @param {Object} param0 - The item and index to render.
-   * @param {Object} param0.item - The boot item.
+   * @param {Object} param0.item - The boot item to render.
    * @param {number} param0.index - The index of the boot item.
    * @returns {JSX.Element} The rendered boot item.
    */
-  const renderBoot = ({ item, index }) => {
+  const renderBoot = ({item, index}) => {
+    /**
+     * Handles the swipeable open action.
+     *
+     * @param {number} id - The ID of the boot item to handle.
+     */
     const handleSwipeableOpen = id => {
       console.log('Swipe Action', `Swiped to delete ${id}`);
       setBootList([]);
@@ -221,10 +225,11 @@ const App = () => {
     };
 
     /**
-     * Renders the right actions for swipeable item.
+     * Renders the right swipeable actions.
+     *
      * @param {number} progress - The progress of the swipe.
-     * @param {number} dragX - The drag distance.
-     * @returns {JSX.Element} The right action component.
+     * @param {number} dragX - The drag distance of the swipe.
+     * @returns {JSX.Element} The rendered right action view.
      */
     const renderRightActions = (progress, dragX) => {
       return (
@@ -241,7 +246,7 @@ const App = () => {
         <View style={styles.rowContainer}>
           <View>
             <CheckBox
-              tintColors={{ true: '#0000FF', false: '#000000' }}
+              tintColors={{true: '#0000FF', false: '#000000'}}
               onValueChange={() => toggleCheckbox(item.id)}
               value={selectedItems[item.id]}
             />
@@ -264,11 +269,12 @@ const App = () => {
   };
 
   /**
-   * Shows a delete alert.
-   * @param {number} index - The index of the boot to delete.
-   */
+   * Displays an alert to confirm deletion of a boot item.
+   *
+   * @param {number} index - The index of the boot item to delete.
+   */  
   const deleteAlert = index =>
-    Alert.alert('Delete an item?', '', [
+    Alert.alert(`Delete an item ${bootList[index].type}?`, '', [
       {
         text: 'Cancel',
         onPress: () => console.log('Cancel Pressed'),
@@ -290,8 +296,9 @@ const App = () => {
     ]);
 
   /**
-   * Gets all IDs of selected boots.
-   * @returns {number[]} The list of selected boot IDs.
+   * Gets the IDs of the selected boot items.
+   *
+   * @returns {number[]} An array of selected boot item IDs.
    */
   const getSelectedItemIds = () => {
     return Object.entries(selectedItems)
@@ -300,7 +307,7 @@ const App = () => {
   };
 
   /**
-   * Deletes all selected boots.
+   * Deletes the selected boot items.
    */
   const deleteSelectedItems = () => {
     const selectedItemIds = getSelectedItemIds();
@@ -342,18 +349,8 @@ const App = () => {
           updateItem={updateItem}
           itemToUpdate={itemToUpdate}
         />
-
-        <Text style={styles.title}>Boot List</Text>
-        <View style={styles.listStyle}>
-          <GestureHandlerRootView style={{ flex: 1 }}>
-            <FlatList
-              contentContainerStyle={styles.flatlistContentContainer}
-              keyExtractor={(item, index) => index.toString()}
-              data={bootList}
-              renderItem={renderBoot}
-            />
-          </GestureHandlerRootView>
-        </View>
+        {bootList.length > 0 && <Text style={styles.title}>Boot List</Text>}
+        <BootList bootList={bootList} renderBoot={renderBoot} />
       </View>
     </View>
   );
@@ -378,6 +375,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     flex: 1,
     marginHorizontal: 5,
+    marginTop: 5,
   },
   rowContainer: {
     flexDirection: 'row',
@@ -391,14 +389,6 @@ const styles = StyleSheet.create({
     paddingLeft: 7,
     marginRight: 5,
   },
-  flatlistContentContainer: {
-    paddingBottom: 20,
-  },
-  listStyle: {
-    flex: 1,
-    width: '100%',
-    backgroundColor: 'yellow',
-  },
   rightAction: {
     backgroundColor: 'black',
     justifyContent: 'center',
@@ -409,8 +399,7 @@ const styles = StyleSheet.create({
     color: 'yellow',
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 14,
     textAlign: 'center',
     marginVertical: 10,
   },
