@@ -104,10 +104,11 @@ Modal
 onPress
 Winter boot size is changed from 45 to 44
 
+<p>
 <img src="./img/p4.png" alt="" width="200"/>
 <img src="./img/p5.png" alt="" width="200"/>
 <img src="./img/p6.png" alt="" width="200"/>
-
+</p>
 
 Flatlist
   renderBoot 
@@ -123,16 +124,19 @@ Modal
 #### Delete item by Alert component
 db:n tauluun boots lisätty archive kenttä, arvo joko 0 tai 1
 
+<p>
 <img src="./img/p7.png" alt="" width="200"/>
 <img src="./img/p8.png" alt="" width="200"/>
 <img src="./img/p9.png" alt="" width="200"/>
+</p>
 
 #### Archive item by Alert component
 
+<p>
 <img src="./img/p10.png" alt="" width="200"/>
 <img src="./img/p11.png" alt="" width="200"/>
 <img src="./img/p12.png" alt="" width="600"/>
-
+</p>
 
 Flatlist
   renderBoot 
@@ -148,10 +152,12 @@ Flatlist
 
 #### Delete item by swiping left
 
+<p>
 <img src="./img/p13.png" alt="" width="200"/>
 <img src="./img/p14.png" alt="" width="200"/>
 <img src="./img/p15.png" alt="" width="200"/>
 <img src="./img/p16.png" alt="" width="200"/>
+</p>
 
 if item is selected by checkbox it will be removed from selectedlist too.
 
@@ -191,10 +197,12 @@ handleSwipeableOpen
 ## Delete selected items (checkbox)
 
 When some item selected delete button will be shown otherwise delete button is not shown.
+
+<p>
 <img src="./img/p17.png" alt="" width="200"/>
 <img src="./img/p18.png" alt="" width="200"/>
 <img src="./img/p19.png" alt="" width="200"/>
-
+</p>
 
 
 import CheckBox from '@react-native-community/checkbox';
@@ -256,5 +264,3 @@ readAllBoot
     
 luetaan kannasta kaikki tiedost taulusta boots ja asetetaan useState muuttujaan 
 
-
---------------------------------------------------------
