@@ -1,4 +1,4 @@
-## Additional Libraries
+## Additional packages/libraries
 
 #### for local SQL-database
 "react-native-sqlite-storage": "^6.0.1"
