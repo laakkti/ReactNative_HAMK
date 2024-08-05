@@ -11,9 +11,10 @@ import {
 import CheckBox from '@react-native-community/checkbox';
 import {AddBoot} from './components/AddBoot';
 import {UpdateBoot} from './components/UpdateBoot';
-import {init, addBoot, updateBoot, deleteBoot, fetchAllBoot} from './db';
-import {GestureHandlerRootView, Swipeable} from 'react-native-gesture-handler';
-import BootList from './components/BootList'; // Import the new component
+import {init, addBoot, updateBoot, deleteBoot, fetchAllBoot} from './components/db';
+import {Swipeable} from 'react-native-gesture-handler';
+import {BootList} from './components/BootList'; // Import the new component
+import {DeleteAlert} from './components/DeleteAlert';
 
 init()
   .then(() => {
@@ -197,7 +198,7 @@ const App = () => {
    *
    * @param {number} id - The ID of the boot item to delete.
    */
-  const deleteItem = id => {
+  const deleteItem = (id) => {
     removeItemFromSelectedList(id);
     deleteBootFromDb(id);
     setUpdateBootList(!updateBootList);
@@ -238,6 +239,8 @@ const App = () => {
       );
     };
 
+    // onLongPress={() => deleteAlert(index)}>
+    // 
     return (
       <Swipeable
         renderRightActions={renderRightActions}
@@ -255,7 +258,9 @@ const App = () => {
             style={styles.touchableStyle}
             activeOpacity={0.8}
             onPress={() => updateItemModal(index)}
-            onLongPress={() => deleteAlert(index)}>
+            onLongPress={() =>  DeleteAlert({
+              item:bootList[index], onDelete:deleteItem, onArchive:updateBootInDb})}>
+          
             <View style={styles.listItemStyle}>
               <Text>
                 {item.type}: {item.size}

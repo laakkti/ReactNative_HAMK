@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
-import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
+import { GestureHandlerRootView} from 'react-native-gesture-handler';
 
 /**
  * BootList component renders a list of boots using a FlatList inside a GestureHandlerRootView.
@@ -10,7 +10,7 @@ import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler'
  * @param {function} props.renderBoot - A function that renders a single boot item.
  * @returns {JSX.Element} The rendered component.
  */
-const BootList = ({ bootList, renderBoot }) => {
+export const BootList = ({ bootList, renderBoot }) => {
   return (
     <View style={styles.listStyle}>
       <GestureHandlerRootView style={{ flex: 1 }}>
@@ -36,5 +36,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BootList;
+//export default BootList;
 

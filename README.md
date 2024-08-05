@@ -1,3 +1,63 @@
+## Additional Libraries
+
+#### for local SQL-database
+"react-native-sqlite-storage": "^6.0.1"
+
+```
+npm i react-native-sqlite-storage
+```
+
+#### for checkbox use
+
+"@react-native-community/checkbox": "^0.5.17"
+```
+npm i @react-native-community/checkbox
+```
+
+"react-native-vector-icons": "^10.1.0"
+```
+npm in react-native-vector-icons
+```
+
+
+#### for swipeable behaviour 
+"react-native-gesture-handler": "^2.18.0"
+
+```
+npm i react-native-gesture-handler
+```
+
+## Components
+
+#### db.js
+local database 
+methods: init, addBoot, updateBoot, deleteBoot, fetchAllBoot
+
+#### BootList.js
+List for the boots
+
+```
+<BootList bootList={bootList} renderBoot={renderBoot}/>
+```
+
+#### AddBoot.js
+Modal dialog for adding new items
+
+```
+<AddBoot visibility={visibility} addItem={addItem}/>
+```
+#### UpdateBoot.js
+Modal dialog for updating selected items by onPress
+
+```
+<UpdateBoot
+    visibility={updateVisibility}
+    updateItem={updateItem}
+    itemToUpdate={itemToUpdate}
+/>
+```
+     
+
 
 Pitäisikö laittaa flatlist kaikkinenn komponentiksi (jolloin  swipeable, sekä checkbox samassa), samoin deleteAlert sekä 
 Emulaattorissa voi kamera ikoni napsia kuvi näytöstä
@@ -17,12 +77,18 @@ Riding
 
 ./db.js was provided
 
-## AddItem
+#### AddItem
 
 <img src="./img/p1.png" alt="" width="200"/>
 <img src="./img/p2.png" alt="" width="200"/>
 <img src="./img/p3.png" alt="" width="200"/>
 
+
+Component AddBoot need to be imported to App.js
+
+``` 
+import {AddBoot} from './components/AddBoot';
+```
 
 ./App.js
 ```
@@ -32,13 +98,16 @@ Riding
 />
 ```
 
-./AddBoot.js
+<AddBoot visibility={visibility} addItem={addItem} />
+
+./components/AddBoot.js
+
 Modal
 -> addItem (App.js)
    -> saveBoot
       addBoot (db.js)    
 
-## UpdateItem
+#### UpdateItem
 
 onPress
 Winter boot size is changed from 45 to 44
@@ -59,23 +128,18 @@ Modal
      updateBoot (db.js)
      
 
-## DeleteItem/ArchiveItem by Alert component
+#### Delete item by Alert component
 db:n tauluun boots lisätty archive kenttä, arvo joko 0 tai 1
-
-Delete
 
 <img src="./img/p7.png" alt="" width="200"/>
 <img src="./img/p8.png" alt="" width="200"/>
 <img src="./img/p9.png" alt="" width="200"/>
 
-
-Archive
+#### Archive item by Alert component
 
 <img src="./img/p10.png" alt="" width="200"/>
 <img src="./img/p11.png" alt="" width="200"/>
 <img src="./img/p12.png" alt="" width="600"/>
-
-
 
 
 Flatlist
@@ -90,7 +154,7 @@ Flatlist
                              deleteBootFromDb(id); 
                                  deleteBoot(id) (db.js)
 
-## DeleteItem by swipe
+#### Delete item by swiping left
 
 <img src="./img/p13.png" alt="" width="200"/>
 <img src="./img/p14.png" alt="" width="200"/>
