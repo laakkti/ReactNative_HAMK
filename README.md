@@ -242,7 +242,7 @@ Button
                                        deleteBoot(id); (db.js)
 
 
-## update fatList
+## Update BootList
 
 
 
