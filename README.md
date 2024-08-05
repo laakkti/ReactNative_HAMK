@@ -76,28 +76,6 @@ DeleteAlert({item:bootList[index], onDelete:deleteItem, onArchive:updateBootInDb
 <img src="./img/p3.png" alt="" width="200"/>
 </p>
 
-Component AddBoot need to be imported to App.js
-
-``` 
-import {AddBoot} from './components/AddBoot';
-```
-
-./App.js
-```
-<Button
-   title="add boot"
-   onPress={() => {setVisibility(true);}}
-/>
-```
-
-<AddBoot visibility={visibility} addItem={addItem} />
-
-./components/AddBoot.js
-
-Modal
--> addItem (App.js)
-   -> saveBoot
-      addBoot (db.js)    
 
 #### UpdateItem
 
@@ -109,20 +87,8 @@ Winter boot size is changed from 45 to 44
 <img src="./img/p5.png" alt="" width="200"/>
 <img src="./img/p6.png" alt="" width="200"/>
 </p>
-
-Flatlist
-  renderBoot 
-  onPress={() => updateItemModal(index)}
-
-./UpdateBoot.js
-Modal
--> updateItem (App.js)
-  -> updateBootInDb
-     updateBoot (db.js)
      
-
 #### Delete item by Alert component
-db:n tauluun boots lisätty archive kenttä, arvo joko 0 tai 1
 
 <p>
 <img src="./img/p7.png" alt="" width="200"/>
@@ -138,18 +104,6 @@ db:n tauluun boots lisätty archive kenttä, arvo joko 0 tai 1
 <img src="./img/p12.png" alt="" width="600"/>
 </p>
 
-Flatlist
-  renderBoot 
-  onLongPress={()=>deleteAlert(index)}
-    
-    archive -> onPress: () =>updateBootInDb(bootList[index].id, bootList[index].type, bootList[index].size, 1) (archive = 1)
-                              updateBoot (db.js)
-
-    ok -> onPress: () => deleteItem(bootList[index].id)}
-                             removeItemFromSelectedList(id);
-                             deleteBootFromDb(id); 
-                                 deleteBoot(id) (db.js)
-
 #### Delete item by swiping left
 
 <p>
@@ -161,38 +115,6 @@ Flatlist
 
 if item is selected by checkbox it will be removed from selectedlist too.
 
-import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
-
-
-<GestureHandlerRootView style={{ flex: 1 }}>
-   <FlatList
-
-
-FlatList
-renderBoot 
-<Swipeable renderRightActions={renderRightActions} onSwipeableOpen={() => handleSwipeableOpen(item.id)}>
-
-
-UI for swipeable
-const renderRightActions = (progress, dragX) => {
-      
-      return (
-        <View style={styles.rightAction}>
-          <Text style={styles.actionText}> will be deleted </Text>
-          
-        </View>
-
-      );
-    };
-
-
-handleSwipeableOpen
-      setBootList([]);
-      deleteItem(id);
-            removeItemFromSelectedList(id);
-           deleteBootFromDb(id);  
-               deleteBoot(id); (db.js)
-
 
 ## Delete selected items (checkbox)
 
@@ -203,64 +125,3 @@ When some item selected delete button will be shown otherwise delete button is n
 <img src="./img/p18.png" alt="" width="200"/>
 <img src="./img/p19.png" alt="" width="200"/>
 </p>
-
-
-import CheckBox from '@react-native-community/checkbox';
-
-OBJECT type
-const [selectedItems, setSelectedItems] = useState({});  
-
-FlatList
-renderBoot
-
-<CheckBox
-   onValueChange={() => toggleCheckbox(item.id)}
-                       setSelectedItems (useState set)  
-
-   value={selectedItems[item.id]}  (checked or not)
-
-if some checked button delete will appear <(tähän kuva)>
-TEE Aniomation gif!!!!!
-
-{hasCheckedItems && (
-            <View style={styles.buttonStyle}>
-              <Button
-                title="delete"
-                onPress={() => {
-                  deleteSelectedItems();
-                }}
-              />
-            </View>
-)}
-
-Button
-   onPress={() => { deleteSelectedItems()}};
-                        loop
-                         deleteItem(id);
-                           removeItemFromSelectedList(id);
-                                 deleteBootFromDb(id);  
-                                       deleteBoot(id); (db.js)
-
-
-## Update BootList
-
-
-
-useEffect
-
-dependency (muuttuja updateList)
-
-```
-useEffect(() => {  
-    readAllBoot();
-  }, [updateBootList]);
-```
-
-setBootList will be caused the rerendering the display
-
-readAllBoot
-  const dbResult = await fetchAllBoot();
-  setBootList(dbResult);
-    
-luetaan kannasta kaikki tiedost taulusta boots ja asetetaan useState muuttujaan 
-
