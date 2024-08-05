@@ -66,7 +66,7 @@ DeleteAlert({item:bootList[index], onDelete:deleteItem, onArchive:updateBootInDb
 ```
 
 
-## uUe cases
+## Use cases
 
 #### Add item
 
@@ -116,7 +116,7 @@ Winter boot size is changed from 45 to 44
 if item is selected by checkbox it will be removed from selectedlist too.
 
 
-## Delete selected items (checkbox)
+#### Delete selected items (checkboxes)
 
 When some item selected delete button will be shown otherwise delete button is not shown.
 
