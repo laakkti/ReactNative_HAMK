@@ -56,32 +56,23 @@ Modal dialog for updating selected items by onPress
     itemToUpdate={itemToUpdate}
 />
 ```
-     
 
+#### DeleteAlert.js
+Alert dialog for delete or archive selected item.
+Called as a function.
 
-Pitäisikö laittaa flatlist kaikkinenn komponentiksi (jolloin  swipeable, sekä checkbox samassa), samoin deleteAlert sekä 
-Emulaattorissa voi kamera ikoni napsia kuvi näytöstä
-
-Work
-Hiking
-Winter
-Rain
-Snow
-Cowboy
-Riding
+```
+DeleteAlert({item:bootList[index], onDelete:deleteItem, onArchive:updateBootInDb})
+```
 
 
 ## use cases
 
-## Local DataBase
-
-./db.js was provided
-
 #### AddItem
 
-<img src="./img/p1.png" alt="" width="200"/>
-<img src="./img/p2.png" alt="" width="200"/>
-<img src="./img/p3.png" alt="" width="200"/>
+<img src="./img/p1.png" alt="" width="100"/>
+<img src="./img/p2.png" alt="" width="100"/>
+<img src="./img/p3.png" alt="" width="100"/>
 
 
 Component AddBoot need to be imported to App.js
