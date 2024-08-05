@@ -66,9 +66,9 @@ DeleteAlert({item:bootList[index], onDelete:deleteItem, onArchive:updateBootInDb
 ```
 
 
-## use cases
+## uUe cases
 
-#### AddItem
+#### Add item
 
 <p>
 <img src="./img/p1.png" alt="" width="200"/>
@@ -77,7 +77,7 @@ DeleteAlert({item:bootList[index], onDelete:deleteItem, onArchive:updateBootInDb
 </p>
 
 
-#### UpdateItem
+#### Update item
 
 onPress
 Winter boot size is changed from 45 to 44
