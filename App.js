@@ -64,8 +64,7 @@ const App = () => {
    */
   const [selectedItems, setSelectedItems] = useState({});
 
-  useEffect(() => {
-    console.log('useEffect');
+  useEffect(() => {  
     readAllBoot();
   }, [updateBootList]);
 
@@ -281,13 +280,13 @@ const App = () => {
       },
       {
         text: 'Archive',
-        onPress: () =>
+        onPress: () => {
           updateBootInDb(
             bootList[index].id,
             bootList[index].type,
             bootList[index].size,
             1,
-          ),
+          )},
       },
       {
         text: 'OK',
