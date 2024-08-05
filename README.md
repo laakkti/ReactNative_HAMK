@@ -70,7 +70,7 @@ DeleteAlert({item:bootList[index], onDelete:deleteItem, onArchive:updateBootInDb
 
 #### AddItem
 
-<p align="center">
+<p>
 <img src="./img/p1.png" alt="" width="200"/>
 <img src="./img/p2.png" alt="" width="200"/>
 <img src="./img/p3.png" alt="" width="200"/>
