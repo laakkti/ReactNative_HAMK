@@ -273,33 +273,6 @@ const App = () => {
   };
 
   /**
-   * Displays an alert to confirm deletion of a boot item.
-   *
-   * @param {number} index - The index of the boot item to delete.
-   */  
-  const deleteAlert = index =>
-    Alert.alert(`Delete an item ${bootList[index].type}?`, '', [
-      {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-      },
-      {
-        text: 'Archive',
-        onPress: () => {
-          updateBootInDb(
-            bootList[index].id,
-            bootList[index].type,
-            bootList[index].size,
-            1,
-          )},
-      },
-      {
-        text: 'OK',
-        onPress: () => deleteItem(bootList[index].id),
-      },
-    ]);
-
-  /**
    * Gets the IDs of the selected boot items.
    *
    * @returns {number[]} An array of selected boot item IDs.
