@@ -79,8 +79,9 @@ DeleteAlert({item:bootList[index], onDelete:deleteItem, onArchive:updateBootInDb
 
 #### Update item
 
-onPress
-Winter boot size is changed from 45 to 44
+"onPress" at item will launch a modal dialog
+
+Winter boot size is changed value size from 45 to 44 to the database
 
 <p>
 <img src="./img/p4.png" alt="" width="200"/>
@@ -90,6 +91,8 @@ Winter boot size is changed from 45 to 44
      
 #### Delete item by Alert component
 
+"onLongPress" at item will launch an alert dialog and selecting choice delete will remove item from the database
+
 <p>
 <img src="./img/p7.png" alt="" width="200"/>
 <img src="./img/p8.png" alt="" width="200"/>
@@ -97,6 +100,8 @@ Winter boot size is changed from 45 to 44
 </p>
 
 #### Archive item by Alert component
+
+onLongPress at item will launch an alert dialog and selecting choice arcive will add archive value to 1 to the database
 
 <p>
 <img src="./img/p10.png" alt="" width="200"/>
@@ -118,7 +123,7 @@ if item is selected by checkbox it will be removed from selectedlist too.
 
 #### Delete selected items (checkboxes)
 
-When some item selected delete button will be shown otherwise delete button is not shown.
+When some item is selected the button delete will be shown otherwise button delete is not shown. By button delete all selected items will  been remove from the database.
 
 <p>
 <img src="./img/p17.png" alt="" width="200"/>
